@@ -15,7 +15,7 @@ To run the file, you can just use julia `create_instances.jl`, or you can pass y
 
 
 ## LLM generation
-With the generated instances, we can test LLM generation with `generation_scp.py`. The choice of prompt instruction and other parameters can be changed through the config files, with our example in the folder `config`. With a sbatch or other ways, the generation can be done by calling it as such: 
+With the generated instances, we can test LLM generation with `generation_scp.py`. The choice of prompt instruction and other parameters can be changed through the config files, with our example in the folder `config`. The different prompt template can accordingly be found under the folder `prompt_template`.With a sbatch or other ways, the generation can be done by calling it as such: 
 `python generation_scp.py --model model_name --config_file path_to_config`. 
 
 For all instances, one file with the generated answer will be created. The file `extract_match.py` then need to be used in order to extract the matching under the rules provided (with flexibility on the expected structures). Both the input folder of where the files are and the output folder needs to be given as arguments: 
