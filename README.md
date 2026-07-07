@@ -23,11 +23,11 @@ For all instances, one file with the generated answer will be created. The file 
 
 Then, another file will compute the 4 metrics: feasibility, assignment stability, matching stability and (student) optimality. In order to compare with the actual solutions, it also needs in arguments to have the initial corresponding DA match for instances, explained in Instances - Dataset section. 
 
-`python compute_metrics.py \  
+```python python compute_metrics.py \  
   --instance-dir /dataset_instance \  
   --llm-match-dir extract_match_path \  
   --real-match-dir /dataset_match \  
-  --output-dir output_path`
+  --output-dir output_path```
 
 Finally, we can aggregate the metrics obtained for all files into one, with results average over all instances, and by number of students and type of preferences. 
 `python aggregation_metric.py  \
