@@ -21,7 +21,21 @@ With the generated instances, we can test LLM generation with `generation_scp.py
 For all instances, one file with the generated answer will be created. The file `extract_match.py` then need to be used in order to extract the matching under the rules provided (with flexibility on the expected structures). Both the input folder of where the files are and the output folder needs to be given as arguments: 
 `python extract_matching.py --input path_input --output path_output`
 
-Then, another file will compute the 4 metrics: feasibility, assignment stability, matching stability and (student) optimality. Similarly, it is runs as such: 
-`
+Then, another file will compute the 4 metrics: feasibility, assignment stability, matching stability and (student) optimality. In order to compare with the actual solutions, it also needs in arguments to have the initial corresponding DA match for instances, explained in Instances - Dataset section. 
+
+`python compute_metrics.py \
+  --instance-dir /dataset_instance \
+  --llm-match-dir extract_match_path \
+  --real-match-dir /dataset_match \
+  --output-dir output_path`
+
+Finally, we can aggregate the metrics obtained for all files into one, with results average over all instances, and by number of students and type of preferences. 
+`python aggregation_metric.py  \
+  --metric-folder metric_scp_path \
+  --output-folder output_path_folder \
+  --output-filename output_path_file \
+  --type-str basic`
+
+  where type-str refers to the prompt chosen, which is basic, basic_role, CoT_pseudo, CoT_python, CoT_txt, CoT_unsupervised, ICL_1, ICL_steps, vague for the prompt instruction Basic, Role, CoT pseudo code, CoT python, CoT text, CoT unsupervised, ICL, ICL w steps and General. 
 
 ### Iterative Prompting
