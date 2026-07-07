@@ -116,7 +116,7 @@ function parse_commandline()
         "--num-students"
             help = "Comma-separated list of student counts""
             arg_type = String
-            default = "5"
+            default = "5,10,15,20"
         "--preferences"
             help = "Comma-separated list of preference modes: Incomplete, Flexible, Complete"
             arg_type = String
