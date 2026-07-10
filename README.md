@@ -1,4 +1,4 @@
-# CAP_Benchmark
+# College Admission Benchmark for LLMs
 
 This repository is providing the code and datasets to our paper **Reasoning with Preference Constraints: A Benchmark for Language Models in Many-to-One Matching Markets**, which provide 369 instances of the College Admission Problem, as well as the code to produce instances with varying parameters and LLM generation of those. 
 
