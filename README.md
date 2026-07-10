@@ -49,3 +49,4 @@ python aggregation_metric.py  \
   where type-str refers to the prompt chosen, which is basic, basic_role, CoT_pseudo, CoT_python, CoT_txt, CoT_unsupervised, ICL_1, ICL_steps, vague for the prompt instruction Basic, Role, CoT pseudo code, CoT python, CoT text, CoT unsupervised, ICL, ICL w steps and General. 
 
 ### Iterative Prompting
+For iterative prompting, which compute automatic feedback on the solutions provided to the LLMs and ask for another updated solution up to the maximal number of attenmpts, the generation file is called `generation_iterative.py`. For extraction and evaluation, the same process goes. 
