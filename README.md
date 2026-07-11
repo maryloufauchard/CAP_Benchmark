@@ -63,4 +63,3 @@ Since we found that improvement across iterations was not always monotonic, the 
   url     = { https: // openreview. net/ forum? id= 2dpt2Ughzt}
 }
 ```
-### License
