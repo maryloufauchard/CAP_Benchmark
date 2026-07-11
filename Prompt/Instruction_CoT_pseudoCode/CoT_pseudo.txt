@@ -1,0 +1,75 @@
+Task
+Implement the student-proposing deferred acceptance algorithm (Gale-Shapley) to solve a many-to-one matching problem for college admissions.
+
+Instance Format
+The instance will contain the following elements: 
+    Num. students: Integer, the number of students
+    Num. colleges: Integer, the number of colleges
+    Students: List of student names
+    Colleges: List of college names
+    Capacities: Dictionary, each college mapped to its capacity (integer)
+    Student preferences: Dictionary, each student is mapped to a list of tuples (rank,college) 
+    College preferences: Dictionary, each college is mapped to a list of tuples (rank, student)
+Ranks are integers where 1 indicates the highest preference.
+
+Constraints
+The output matching must satisfy the following:
+Feasibility: 
+    Each student is matched to at most one college.
+    No college is matched with more students than its capacity.
+Stability: 
+    There must be no blocking pair (student, college) such that: 
+        The student prefers the college over their current match, and
+        The college either has not reached its capacity or prefers the student to at least one of its current matches.
+Optimality: 
+    Among all stable matchings, students are matched to the best possible college based on their preferences.
+
+Output Format
+Return the matching as a list of tuples of the form (student, match). If a student is unmatched, use “nothing” as the college. 
+
+Instance
+The instance to solve is :
+[ADD INSTANCE HERE]
+
+Step by Step Process
+// INITIALIZE:
+  for each student s in S:
+    s.next_choice ← 1        // index into Pref(s), starting at top choice
+    s.is_free     ← true
+  for each college c in C:
+    c.waiting_list ← ∅       // no one tentatively held yet
+    c.applicants   ← ∅       // applications in the current round
+
+REPEAT
+  //  Free students apply to their next choice
+  for each student s in S:
+    if s.is_free and s.next_choice ≤ length(Pref(s)): 
+      let c = Pref(s)[s.next_choice]
+      add s to c.applicants
+      s.next_choice ← s.next_choice + 1
+
+  // Colleges review their applicant pools
+  any_rejection ← false
+  for each college c in C:
+    pool ← c.waiting_list ∪ c.applicants
+    remove from pool any student unacceptable to c
+    sort pool by c's priority order (best first)
+    c.waiting_list ← first q(c) students in pool
+    rejected ← pool minus c.waiting_list
+    for each student r in rejected:
+      r.is_free ← true
+      any_rejection ← true
+    for each student a in c.waiting_list:
+      a.is_free ← false
+    c.applicants ← ∅
+
+UNTIL any_rejection is false
+
+// Final assignments
+for each college c in C:
+  admit every student in c.waiting_list
+
+Instruction
+Return only the final matching as a list of tuples.
+
+Final Matching : 
