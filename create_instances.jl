@@ -1,4 +1,3 @@
-
 include("algorithms.jl")
 include("Instances.jl")
 using Random
