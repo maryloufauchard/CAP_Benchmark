@@ -20,7 +20,7 @@ Note that for each number of students, the different number of schools were deci
 
 
 ## LLM generation
-With the generated instances, we can test LLM generation with `generation_scp.py`. The choice of prompt instruction and other parameters can be changed through the config files, with our example in the file `config`. The different prompt template can accordingly be found under the folder `prompt_template`. 
+With the generated instances, we can test LLM generation with `generation_scp.py`. The choice of prompt instruction and other parameters can be changed through the config files, with our example in the file `config`. The different prompt template can accordingly be found under the folder `Prompt`. 
 The generation can be done by calling it as such: 
 `python generation_scp.py --model model_name --config_file path_to_config`. 
 
