@@ -1,0 +1,37 @@
+Task
+Implement the student-proposing deferred acceptance algorithm (Gale-Shapley) to solve a many-to-one matching problem for college admissions.
+
+Instance Format
+The instance will contain the following elements: 
+    Num. students: Integer, the number of students
+    Num. colleges: Integer, the number of colleges
+    Students: List of student names
+    Colleges: List of college names
+    Capacities: Dictionary, each college mapped to its capacity (integer)
+    Student preferences: Dictionary, each student is mapped to a list of tuples (rank,college) 
+    College preferences: Dictionary, each college is mapped to a list of tuples (rank, student)
+Ranks are integers where 1 indicates the highest preference.
+
+Constraints
+The output matching must satisfy the following:
+Feasibility: 
+    Each student is matched to at most one college.
+    No college is matched with more students than its capacity.
+Stability: 
+    There must be no blocking pair (student, college) such that: 
+        The student prefers the college over their current match, and
+        The college either has not reached its capacity or prefers the student to at least one of its current matches.
+Optimality: 
+    Among all stable matchings, students are matched to the best possible college based on their preferences.
+
+Output Format
+Return the matching as a list of tuples of the form (student, match). If a student is unmatched, use “nothing” as the college. 
+
+Instance
+The instance to solve is :
+[ADD INSTANCE HERE]
+
+Instruction
+Return only the final matching as a list of tuples. Think step by step. 
+
+Final Matching : 
