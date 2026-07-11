@@ -1,0 +1,20 @@
+# Num. students:5
+# Num. colleges:4
+# Students:s1,s2,s3,s4,s5
+# Colleges:c1,c2,c3,c4
+# Capacities:
+c1 4
+c2 2
+c3 2
+c4 2
+# Student preferences:
+s1 (1,c2)
+s2 (1,c1)
+s3 (1,c1)
+s4 (1,c2)
+s5 (1,c3)
+# College priorities:
+c1 (1,s1) (2,s4) (3,s3) (4,s5) (5,s2)
+c2 (1,s3) (2,s4) (3,s5) (4,s2) (5,s1)
+c3 (1,s3) (2,s4) (3,s2) (4,s1) (5,s5)
+c4 (1,s2) (2,s3) (3,s1) (4,s4) (5,s5)
