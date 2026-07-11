@@ -1,0 +1,2 @@
+# DA matching of corresponding input
+[("s1", "c3"), ("s2", "c1"), ("s3", "c3"), ("s4", "c3"), ("s5", "nothing"), ("s6", "c2"), ("s7", "c4"), ("s8", "c1"), ("s9", "c4"), ("s10", "nothing")]
