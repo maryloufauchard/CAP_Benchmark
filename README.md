@@ -54,5 +54,13 @@ For iterative prompting, where automatic feedback is computed on a proposed solu
 Since we found that improvement across iterations was not always monotonic, the first, best, and last matchings produced for each instance are each saved to their own dedicated output folder.
 
 ### Citations 
-
+```
+@article{ong2026fakemirror,
+  title   = {Reasoning with Preference Constraints: A Benchmark for Language Models in Many-to-One Matching Markets},
+  author  = {Marylou Fauchard and Florian Carichon and Margarida Carvalho and Golnoosh Farnadi},
+  journal = {Transactions on Machine Learning Research},
+  year    = {2026},
+  url     = { https: // openreview. net/ forum? id= 2dpt2Ughzt}
+}
+```
 ### License
