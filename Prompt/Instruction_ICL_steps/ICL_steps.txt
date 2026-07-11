@@ -1,0 +1,78 @@
+Task
+Implement the student-proposing deferred acceptance algorithm (Gale-Shapley) to solve a many-to-one matching problem for college admissions.
+
+Instance Format
+    The instance will contain the following elements: 
+    Num. students: Integer, the number of students
+    Num. colleges: Integer, the number of colleges
+    Students: List of student names
+    Colleges: List of college names
+    Capacities: Dictionary, each college mapped to its capacity (integer)
+    Student preferences: Dictionary, each student is mapped to a list of tuples (rank,college) 
+    College preferences: Dictionary, each college is mapped to a list of tuples (rank, student)
+Ranks are integers where 1 indicates the highest preference.
+
+Constraints
+The output matching must satisfy the following:
+Feasibility: 
+    Each student is matched to at most one college.
+    No college is matched with more students than its capacity.
+Stability: 
+    There must be no blocking pair (student, college) such that: 
+        The student prefers the college over their current match, and
+        The college either has not reached its capacity or prefers the student to at least one of its current matches.
+Optimality: 
+    Among all stable matchings, students are matched to the best possible college based on their preferences.
+
+Output Format
+Return the matching as a list of tuples of the form (student, match). If a student is unmatched, use “nothing” as the college. 
+
+Example
+Here is an example consisting of an instance, the step-by-step application of the algorithm, and the final matching.
+**Instance**
+# Num. students: 5
+# Num. Colleges: 3
+# Students: s1, s2, s3, s4, s5
+# Colleges: c1, c2, c3
+# Capacities: 
+c1  2,
+c2  1,
+c3  2 
+# Student preferences: 
+s1 (1,c1) (2,c2) (3,c3)
+s2 (1,c1) (2,c3) (3,c2)
+s3 (1,c2) (2,c1) (3,c3)
+s4 (1,c3) (2,c2) (3,c1)
+s5 (1,c1) (2,c2) (3,c3)
+# Colleges priorities: 
+c1 (1,s2) (2,s1) (3,s5) (4,s3) (5,s4)
+c2 (1,s3) (2,s1) (3,s4) (4,s5) (5,s2)
+c3 (1,s4) (2,s2) (3,s5) (4,s1) (5,s3)
+**Step by Step DA Algorithm**
+Round 1 : 
+    s1, s2, s3, s4, s5 propose to their 1st choices, c1, c1, c2, c3, c1 respectively. 
+    c1 (capacity of 2) gets proposals from s1, s2, s5. It prefers s1 and s2. It rejects s5.
+    c2 (capacity of 1) gets a proposal from s3 and holds it
+    c3 (capacity of 2) gets a proposal from s4 and holds it.
+    Applications of hold :  c1 :{s1,s2}, c2 :{s3} and c3:{s4}. Rejected:{s5}
+Round 2 : 
+    s5 (previously rejected) proposes to its next choice, c2.
+    c2 (capacity of 1) compares the new proposal (s5) to its current hold (s3). It prefers s3. It rejects s5.
+    Applications of hold :  c1 :{s1,s2}, c2 :{s3} and c3:{s4}. Rejected:{s5}
+Round 3 : 
+    s5 (previously rejected) proposes to its next choice, c2.
+    c3 (capacity of 2) gets a proposal from s5. It is holding s4 and has an open spot. It holds s5.
+    Applications of hold :  c1 :{s1,s2}, c2 :{s3} and c3:{s4,s5}. Rejected:{}
+There was no rejection on the last round, the algorithm ends and the colleges accept the students on hold. 
+**Final Matching**
+The final matching is : 
+(s1,c1),(s2,c1),(s3,c2),(s4,c3),(s5,c3)
+
+Instance
+The instance to solve is :
+[ADD INSTANCE HERE]
+
+Instruction
+Return only the final matching as a list of tuples.
+
+Final Matching : 
