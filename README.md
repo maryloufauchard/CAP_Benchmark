@@ -55,7 +55,7 @@ Since we found that improvement across iterations was not always monotonic, the 
 
 ### Citations 
 ```
-@article{ong2026fakemirror,
+@article{CAPbenchmark2026fauchard,
   title   = {Reasoning with Preference Constraints: A Benchmark for Language Models in Many-to-One Matching Markets},
   author  = {Marylou Fauchard and Florian Carichon and Margarida Carvalho and Golnoosh Farnadi},
   journal = {Transactions on Machine Learning Research},
