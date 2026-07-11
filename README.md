@@ -1,33 +1,33 @@
 # College Admission Benchmark for LLMs
 
-This repository is providing the code and datasets to our paper **Reasoning with Preference Constraints: A Benchmark for Language Models in Many-to-One Matching Markets**, which provide 369 instances of the College Admission Problem, as well as the code to produce instances with varying parameters and LLM generation of those. 
+This repository provides the code and datasets accompanying our paper **"Reasoning with Preference Constraints: A Benchmark for Language Models in Many-to-One Matching Markets."** It includes 369 instances of the College Admissions Problem, along with code to generate new instances with varying parameters and to run LLM generation on them.
 
 ## Installation
-Our code is made to be reproducible and extendable. During our experiments, we realize that one of the model tested, GPT-oss 120B, was particularly sensible to quantization and environmental setup. 
+Our code is designed to be reproducible and extensible. During our experiments, we found that one of the tested models, GPT-oss-120B, was particularly sensitive to quantization and environment configuration.
 
-Therefore, we recommend creating the environment using `pip install -r requirements.txt`. 
+We therefore recommend creating a dedicated environment and installing dependencies via: `pip install -r requirements.txt`. 
 
 ## Instances - Dataset
-The 369 instances are provided under `dataset_instance`. The solution of each of them using the DA algorithm is respectively provided in `dataset_match`. 
-While our instances were specifically created to test varying parameters, such as number of students, number of schools, the capacity of the schools and the type of preferences, the file `creation_instances.jl` allow to generate new instances, which could be useful to extend to broader parameters range, or simply generate new instances with new seeds to prevent memorization. 
+The 369 instances are provided under `dataset_instance`. with the corresponding Deferred Acceptance (DA) solution for each provided under `dataset_match`. 
 
-To run the file, you can just use julia `create_instances.jl`, or you can pass your arguments as 
+While our instances were constructed to test a specific set of varying parameters, such as number of students, number of schools, the capacity of the schools and the type of preferences, the file `creation_instances.jl` can be used to generate new instances, e.g. to extend the parameter range or to generate fresh instances with new seeds to prevent memorization.
+
+The script can be run with default parameters: `julia create_instances.jl`, or you can pass your arguments as 
 ```python
 julia create_instances.jl --num-students 5,10,15,20 --preferences Complete --seeds 1,2,3 --input-dir my_instances --match-dir my_matches
 ```
 
-Note that for each number of students, the different number of schools were decided based on ratios and total capacity. As they are different per students, they remain as a constant that needs to be changed in the file. 
-
+Note: for each student count, the corresponding number of schools is chosen based on fixed ratios and total capacities. Since these mappings differ per student count, they are kept as constants within the file and must be edited directly if a different configuration is needed.
 
 ## LLM generation
-With the generated instances, we can test LLM generation with `generation_scp.py`. The choice of prompt instruction and other parameters can be changed through the config files, with our example in the file `config`. The different prompt template can accordingly be found under the folder `Prompt`. 
+With the generated instances, LLM generation can be run via `generation_scp.py`. The prompt instruction and other generation parameters are set through a config file (see the example in `config.py`). The corresponding prompt templates are available under `Prompt`. 
 The generation can be done by calling it as such: 
 `python generation_scp.py --model model_name --config_file path_to_config`. 
 
-For all instances, one file with the generated answer will be created. The file `extract_match.py` then need to be used in order to extract the matching under the rules provided (with flexibility on the expected structures). Both the input folder of where the files are and the output folder needs to be given as arguments: 
+For all instances, one file with the generated answers will be created. The file `extract_match.py` is then used to extract the matching from each generated file, with tolerance for variation in output structure. Both the input folder (containing generated answers) and the output folder must be provided:
 `python extract_matching.py --input path_input --output path_output`
 
-Then, another file will compute the 4 metrics: feasibility, assignment stability, matching stability and (student) optimality. In order to compare with the actual solutions, it also needs in arguments to have the initial corresponding DA match for instances, explained in Instances - Dataset section. 
+Next, `compute_metrics.py` computes the four evaluation metrics: feasibility, assignment stability, matching stability and (student) optimality. It is compared with the actual DA solutions: 
 
 ```python
 python compute_metrics.py \  
@@ -37,7 +37,7 @@ python compute_metrics.py \
   --output-dir output_path
 ```
 
-Finally, we can aggregate the metrics obtained for all files into one, with results average over all instances, and by number of students and type of preferences. 
+Finally, `aggregate_metric.py` aggregates the per-instance metrics into a single summary, averaged overall and broken down by number of students and preference type:
 ```python
 python aggregation_metric.py  \
   --metric-folder metric_scp_path \
@@ -46,7 +46,13 @@ python aggregation_metric.py  \
   --type-str basic
 ```
 
-  where type-str refers to the prompt chosen, which is basic, basic_role, CoT_pseudo, CoT_python, CoT_txt, CoT_unsupervised, ICL_1, ICL_steps, vague for the prompt instruction Basic, Role, CoT pseudo code, CoT python, CoT text, CoT unsupervised, ICL, ICL w steps and General. 
+`--type_str` identifies the prompting strategy used to generate the evaluated outputs, and takes one of the following values: basic, basic_role, CoT_pseudo, CoT_python, CoT_txt, CoT_unsupervised, ICL_1, ICL_steps, vague for the prompt instruction Basic, Role, CoT pseudo code, CoT python, CoT text, CoT unsupervised, ICL, ICL w steps and General. 
 
 ### Iterative Prompting
-For iterative prompting, which compute automatic feedback on the solutions provided to the LLMs and ask for another updated solution up to the maximal number of attenmpts, the generation file is called `generation_iterative.py`. For extraction and evaluation, the same process goes. Following our findings that the improvement was not always monotonic, the first matching, the best one and the last one will be stored in respective folders. 
+For iterative prompting, where automatic feedback is computed on a proposed solution and the model is asked to revise it (up to a maximum number of attempts), the corresponding generation script is generation_iterative.py. Extraction and evaluation follow the same procedure described above.
+
+Since we found that improvement across iterations was not always monotonic, the first, best, and last matchings produced for each instance are each saved to their own dedicated output folder.
+
+### Citations 
+
+### License
