@@ -24,7 +24,7 @@ With the generated instances, LLM generation can be run via `generation_scp.py`.
 The generation can be done by calling it as such: 
 `python generation_scp.py --model model_name --config_file path_to_config`. 
 
-For all instances, one file with the generated answers will be created. The file `extract_matching.py` is then used to extract the matching from each generated file, with tolerance for variation in output structure. Both the input folder (containing generated answers) and the output folder must be provided:
+For all instances, one file with the generated answers will be created. The file `extract_match.py` is then used to extract the matching from each generated file, with tolerance for variation in output structure. Both the input folder (containing generated answers) and the output folder must be provided:
 `python extract_matching.py --input path_input --output path_output`
 
 Next, `metric_scp.py` computes the four evaluation metrics: feasibility, assignment stability, matching stability and (student) optimality. It is compared with the actual DA solutions: 
